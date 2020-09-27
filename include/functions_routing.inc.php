@@ -375,6 +375,14 @@ function serveEntry($matches) {
     $serendipity['GET']['id']     = $id;
 
     $title = serendipity_db_query("SELECT title FROM {$serendipity['dbPrefix']}entries WHERE id=$id AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : ''), true);
+
+    // We need to stop the entry serving here if the title requested is not the title of the found entry
+    if (stristr($$serendipity['permalinkStructure'], '%title%') === FALSE) {
+        if ($matches[3] != serendipity_makeFilename($title[0])) {
+            $serendipity['GET']['id'] = false;   
+        }
+    }
+    
     if (is_array($title)) {
         $serendipity['head_title']    = serendipity_specialchars($title[0]);
         $serendipity['head_subtitle'] = serendipity_specialchars($serendipity['blogTitle']);

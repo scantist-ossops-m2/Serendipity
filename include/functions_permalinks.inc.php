@@ -256,7 +256,7 @@ function serendipity_initPermalinks() {
      * function serendipity_installFiles().
      */
     @define('PAT_FILENAME',       '0-9a-z\.\_!;,\+\-\%');
-    @define('PAT_FILENAME_MATCH', '[' . PAT_FILENAME . ']+');
+    @define('PAT_FILENAME_MATCH', '([' . PAT_FILENAME . ']+)');
     @define('PAT_DIRNAME_MATCH',  '[' . PAT_FILENAME . '/]*');
     @define('PAT_CSS',            '@/(serendipity\.css|serendipity_admin\.css)@');
     @define('PAT_JS',             '@/(serendipity\.js|serendipity_admin\.js)@');
@@ -341,7 +341,6 @@ function serendipity_searchPermalink($struct, $url, $default, $type = 'entry') {
             return $permalink['entry_id'];
         }
     }
-
     return $default;
 }
 

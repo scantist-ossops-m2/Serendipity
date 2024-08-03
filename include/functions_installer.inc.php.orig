@@ -761,7 +761,7 @@ function serendipity_checkInstallation() {
         $errs[] = sprintf(EMPTY_SETTING, INSTALL_DBPREFIX);
     }
 
-    $serendipity['dbType'] = preg_replace('@[^a-z0-9-]@imsU', '', $_POST['dbType']);
+    $serendipity['dbType'] = $_POST['dbType'];
     // Probe database
     // (do it after the dir stuff, as we need to be able to create the sqlite database)
     @include_once($_POST['serendipityPath'] . 'include/db/db.inc.php');
